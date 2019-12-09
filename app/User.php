@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * User defined functions
+     */
+    public function get_users(){
+        return $this->orderby('name')->get();
+    }
 }
