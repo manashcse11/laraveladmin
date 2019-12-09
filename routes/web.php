@@ -19,3 +19,4 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('user', 'UserController')->middleware('auth');
+Route::get('user/{user}/delete', 'UserController@delete')->name('user.delete')->middleware('auth'); // Manually delete using GET method
