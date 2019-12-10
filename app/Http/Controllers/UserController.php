@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\User;
 
@@ -38,11 +39,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->transaction_validate($request);
-        $transaction = new Transaction();
-        if($this->transaction_insert_or_update($request, $transaction)){
-            $request->session()->flash('status', 'Transaction added successfully!');
-            return redirect()->route('transaction.create');
+        $this->user_validate($request);
+        $user = new User();
+        if($this->user_insert_or_update($request, $user)){
+            $request->session()->flash('status', 'User added successfully!');
+            return redirect()->route('user.create');
         }
     }
 
@@ -115,24 +116,18 @@ class UserController extends Controller
         }
     }
 
-    public function transaction_validate($request){
+    public function user_validate($request){
         return $validated = $request->validate([
-            'amount' => 'required|numeric',
-            'start_date' => 'required',
-            'duration' => 'required|numeric',
-            'interest_rate' => 'required|numeric',
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users|email',
+            'password' => 'required|min:3|confirmed',
+            'password_confirmation' => 'required|min:3'
         ]);
     }
-    public function transaction_insert_or_update($request, $obj){
-        $obj->user_id = $request->user_id;
-        $obj->type_id = $request->type_id;
-        $obj->organization_id = $request->organization_id;
-        $obj->amount = $request->amount;
-        $obj->start_date = Carbon::parse($request->start_date)->format('Y-m-d');
-        $obj->duration = $request->duration;
-        $obj->interest_rate = $request->interest_rate;
-        $obj->auto_renewal = $request->auto_renewal ? $request->auto_renewal : 0;
-        $obj->mature_date = Carbon::parse($request->start_date)->addYears($request->duration)->format('Y-m-d');
+    public function user_insert_or_update($request, $obj){
+        $obj->name = $request->name;
+        $obj->email = $request->email;
+        $obj->password = Hash::make($request->password);
         if($obj->save()){
             return true;
         }
