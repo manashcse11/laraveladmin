@@ -20,3 +20,9 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('user', 'UserController')->middleware('auth');
 Route::get('user/{user}/delete', 'UserController@delete')->name('user.delete')->middleware('auth'); // Manually delete using GET method
+
+Route::resource('role', 'RoleController')->middleware('auth');
+Route::get('role/{role}/delete', 'RoleController@delete')->name('role.delete')->middleware('auth'); // Manually delete using GET method
+
+Route::resource('permission', 'PermissionController')->middleware('auth');
+Route::get('permission/{permission}/delete', 'PermissionController@delete')->name('permission.delete')->middleware('auth'); // Manually delete using GET method
