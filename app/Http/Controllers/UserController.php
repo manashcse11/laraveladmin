@@ -66,11 +66,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data['users'] = User::orderby('name')->get();
-        $data['types'] = Type::orderby('name')->get();
-        $data['organizations'] = Organization::orderby('name')->get();
-        $data['transaction'] = Transaction::find($id);
-        return view('transaction.edit', $data);
+        $user = User::find($id);
+        return view('user.edit', $user);
     }
 
     /**
@@ -80,13 +77,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, User $user)
     {
-        $this->transaction_validate($request);
-        if($this->transaction_insert_or_update($request, $transaction)){
-            $type = Type::find($transaction->type_id);
-            $request->session()->flash('status', 'Transaction saved successfully!');
-            return redirect()->route('transaction.index', ['slug' => $type->slug]);
+        $this->user_validate($request);
+        if($this->user_insert_or_update($request, $user)){
+            $request->session()->flash('status', 'User saved successfully!');
+            return redirect()->route('user.index');
         }
     }
 
@@ -119,9 +115,9 @@ class UserController extends Controller
     public function user_validate($request){
         return $validated = $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|unique:users|email',
-            'password' => 'required|min:3|confirmed',
-            'password_confirmation' => 'required|min:3'
+            'email' => 'required|unique:users,id|email',
+            'password' => 'sometimes|required|min:3|confirmed',
+            'password_confirmation' => 'sometimes|required|min:3'
         ]);
     }
     public function user_insert_or_update($request, $obj){
