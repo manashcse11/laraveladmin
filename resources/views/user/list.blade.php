@@ -45,8 +45,8 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            <a href="{{route('user.edit', $user->id)}}"><i class="fa fa-edit fa-lg"></i></a>
-                                            <a href="{{ route('user.delete', $user->id) }}"><i class="fa fa-trash text-danger fa-lg"></i></a>
+                                            <a href="{{route('user.edit', $user->id)}}"><i class="fa fa-edit fa-sm"></i></a>
+                                            <a href="{{ route('user.delete', $user->id) }}"><i class="fa fa-trash text-danger fa-sm ml-1"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
