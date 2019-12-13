@@ -23,6 +23,11 @@
                             <h3 class="card-title">Showing user list</h3>
                         </div>
                         <div class="card-body">
+                            @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
                             <table class="table table-bordered table-hover font-13">
                                 <thead>
                                 <tr>

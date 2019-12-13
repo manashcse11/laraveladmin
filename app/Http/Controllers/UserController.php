@@ -123,7 +123,9 @@ class UserController extends Controller
     public function user_insert_or_update($request, $obj){
         $obj->name = $request->name;
         $obj->email = $request->email;
-        $obj->password = Hash::make($request->password);
+        if(isset($request->password)){
+            $obj->password = Hash::make($request->password);
+        }
         if($obj->save()){
             return true;
         }
