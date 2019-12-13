@@ -6,7 +6,8 @@
         @foreach($sidebar_menus as $sm)
         <li class="nav-item has-treeview {{ (request()->is(str_replace(".", "/", str_replace(".index", "", $sm['route'])))) ? 'menu-open' : '' }}">
             <a href="{{ route($sm['route']) }}" class="nav-link {{ (request()->is(str_replace(".", "/", str_replace(".index", "", $sm['route'])))) ? 'active' : '' }}">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+{{--                <i class="nav-icon fas fa-tachometer-alt"></i>--}}
+                <i class="nav-icon {{ $sm['icon'] }}"></i>
                 <p>
                     {{ $sm['name'] }}
                     <i class="right fas fa-angle-left"></i>
