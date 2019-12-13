@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">User Create</h1>
+                    <h1 class="m-0 text-dark">Role Create</h1>
                 </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -25,27 +25,12 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('user.store') }}">
+                            <form method="POST" action="{{ route('role.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" type="text" name="name" value="{{ old('name')}}" placeholder="Name">
                                     <small class="text-danger">{{ $errors->first('name') }}</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" type="email" name="email" placeholder="Email " value="{{ old('email')}}">
-                                    <small class="text-danger">{{ $errors->first('email') }}</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input class="form-control {{ $errors->has('password') ? 'is-invalid' : ''}}" type="password" name="password" placeholder="Password" value="{{ old('password')}}">
-                                    <small class="text-danger">{{ $errors->first('password') }}</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password_confirmation">Confirm Password</label>
-                                    <input class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : ''}}" type="password" name="password_confirmation" placeholder="Confirm password" value="{{ old('password_confirmation')}}">
-                                    <small class="text-danger">{{ $errors->first('password_confirmation') }}</small>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-10">

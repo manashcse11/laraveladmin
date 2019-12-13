@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">User List</h1>
+                    <h1 class="m-0 text-dark">Role List</h1>
                 </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Showing user list</h3>
+                            <h3 class="card-title">Showing Role list</h3>
                         </div>
                         <div class="card-body">
                             @if (session('status'))
@@ -37,21 +37,17 @@
                                     <th class="align-top" scope="col">
                                         Name
                                     </th>
-                                    <th class="align-top" scope="col">
-                                        Email
-                                    </th>
                                     <th class="align-top" scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($users as $user)
+                                @foreach ($roles as $role)
                                     <tr>
                                         <th scope="row">{{ $loop->index + 1 }}</th>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
+                                        <td>{{ $role->name }}</td>
                                         <td>
-                                            <a href="{{route('user.edit', $user->id)}}"><i class="fa fa-edit fa-sm"></i></a>
-                                            <a href="{{ route('user.delete', $user->id) }}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash text-danger fa-sm ml-1"></i></a>
+                                            <a href="{{route('role.edit', $role->id)}}"><i class="fa fa-edit fa-sm"></i></a>
+                                            <a href="{{ route('role.delete', $role->id) }}" onclick="return confirm('Are you sure?')"><i class="fa fa-trash text-danger fa-sm ml-1"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
-use App\User;
+use App\Role;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $user = new User();
-        $data['users'] = $user->get_users();
-        return view('user.list', $data);
+        $role = new Role();
+        $data['roles'] = $role->get_roles();
+        return view('role.list', $data);
     }
 
     /**
@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('role.create');
     }
 
     /**
@@ -39,11 +39,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->user_validate($request);
-        $user = new User();
-        if($this->user_insert_or_update($request, $user)){
-            $request->session()->flash('status', 'User added successfully!');
-            return redirect()->route('user.create');
+        $this->role_validate($request);
+        $role = new Role();
+        if($this->insert_or_update($request, $role)){
+            $request->session()->flash('status', 'Role added successfully!');
+            return redirect()->route('role.create');
         }
     }
 
@@ -66,8 +66,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('user.edit', $user);
+        $role = Role::find($id);
+        return view('role.edit', $role);
     }
 
     /**
@@ -77,12 +77,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Role $role)
     {
-        $this->user_validate($request);
-        if($this->user_insert_or_update($request, $user)){
-            $request->session()->flash('status', 'User saved successfully!');
-            return redirect()->route('user.index');
+        $this->role_validate($request);
+        if($this->insert_or_update($request, $role)){
+            $request->session()->flash('status', 'Role saved successfully!');
+            return redirect()->route('role.index');
         }
     }
 
@@ -103,28 +103,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, User $user)
+    public function delete(Request $request, Role $role)
     {
-        if($user->delete()){
-            $request->session()->flash('status', 'User has been deleted!');
-            return redirect()->route('user.index');
+        if($role->delete()){
+            $request->session()->flash('status', 'Role has been deleted!');
+            return redirect()->route('role.index');
         }
     }
 
-    public function user_validate($request){
+    public function role_validate($request){
         return $validated = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|unique:users,id|email',
-            'password' => 'sometimes|required|min:3|confirmed',
-            'password_confirmation' => 'sometimes|required|min:3'
+            'name' => 'required|max:255'
         ]);
     }
-    public function user_insert_or_update($request, $obj){
+    public function insert_or_update($request, $obj){
         $obj->name = $request->name;
-        $obj->email = $request->email;
-        if(isset($request->password)){
-            $obj->password = Hash::make($request->password);
-        }
         if($obj->save()){
             return true;
         }

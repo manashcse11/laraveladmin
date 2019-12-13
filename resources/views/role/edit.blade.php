@@ -25,18 +25,13 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('user.update', $id) }}">
+                            <form method="POST" action="{{ route('role.update', $id) }}">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" type="text" name="name" value="{{ old('name', $name)}}" placeholder="Name">
                                     <small class="text-danger">{{ $errors->first('name') }}</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input class="form-control {{ $errors->has('email') ? 'is-invalid' : ''}}" type="email" name="email" placeholder="Email " value="{{ old('email', $email)}}">
-                                    <small class="text-danger">{{ $errors->first('email') }}</small>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-10">
