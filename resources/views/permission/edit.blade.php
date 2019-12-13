@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Role Update</h1>
+                    <h1 class="m-0 text-dark">Permission Update</h1>
                 </div>
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -25,13 +25,18 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('role.update', $id) }}">
+                            <form method="POST" action="{{ route('permission.update', $id) }}">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}" type="text" name="name" value="{{ old('name', $name)}}" placeholder="Name">
                                     <small class="text-danger">{{ $errors->first('name') }}</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="route">Route</label>
+                                    <input class="form-control {{ $errors->has('route') ? 'is-invalid' : ''}}" type="text" name="route" value="{{ old('route', $route)}}" placeholder="Route">
+                                    <small class="text-danger">{{ $errors->first('route') }}</small>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-10">
