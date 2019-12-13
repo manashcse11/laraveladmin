@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -41,6 +42,6 @@ class User extends Authenticatable
      * User defined functions
      */
     public function get_users(){
-        return $this->orderby('name')->get();
+        return $this->where('id', '<>', Auth::id())->orderby('name')->get();
     }
 }

@@ -103,12 +103,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Request $request, Transaction $transaction)
+    public function delete(Request $request, User $user)
     {
-        $type = Type::find($transaction->type_id);
-        if($transaction->delete()){
-            $request->session()->flash('status', 'Transaction has been deleted!');
-            return redirect()->route('transaction.index', ['slug' => $type->slug]);
+        if($user->delete()){
+            $request->session()->flash('status', 'User has been deleted!');
+            return redirect()->route('user.index');
         }
     }
 
