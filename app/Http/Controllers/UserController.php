@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = new User();
-        $data['users'] = $user->get_users();
+        $data['users'] = $user->get_users(25);
         return view('user.list', $data);
     }
 

@@ -41,7 +41,7 @@ class User extends Authenticatable
     /**
      * User defined functions
      */
-    public function get_users(){
-        return $this->where('id', '<>', Auth::id())->orderby('name')->get();
+    public function get_users($per_page=25){
+        return $this->where('id', '<>', Auth::id())->orderby('name')->paginate($per_page);
     }
 }
