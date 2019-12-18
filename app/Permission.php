@@ -23,7 +23,7 @@ class Permission extends Authenticatable
     /**
      * User defined functions
      */
-    public function get_permissions(){
-        return $this->orderby('name')->get();
+    public function get_permissions($per_page=25){
+        return $this->orderby('name')->paginate($per_page);
     }
 }

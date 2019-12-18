@@ -41,9 +41,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($roles as $role)
+                                @foreach ($roles as $key => $role)
                                     <tr>
-                                        <th scope="row">{{ $loop->index + 1 }}</th>
+                                        <th scope="row">{{ $roles->firstItem() + $key }}</th>
                                         <td>{{ $role->name }}</td>
                                         <td>
                                             <a href="{{route('role.edit', $role->id)}}"><i class="fa fa-edit fa-sm"></i></a>
@@ -57,6 +57,7 @@
                     </div>
                 </div>
             </div>
+        {{ $roles->links() }}
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>

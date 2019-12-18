@@ -17,7 +17,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $role = new Role();
-        $data['roles'] = $role->get_roles();
+        $data['roles'] = $role->get_roles(25);
         return view('role.list', $data);
     }
 

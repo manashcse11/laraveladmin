@@ -17,7 +17,7 @@ class PermissionController extends Controller
     public function index(Request $request)
     {
         $permission = new Permission();
-        $data['permissions'] = $permission->get_permissions();
+        $data['permissions'] = $permission->get_permissions(25);
         return view('permission.list', $data);
     }
 

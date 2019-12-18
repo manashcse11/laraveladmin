@@ -44,9 +44,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($permissions as $permission)
+                                @foreach ($permissions as $key => $permission)
                                     <tr>
-                                        <th scope="row">{{ $loop->index + 1 }}</th>
+                                        <th scope="row">{{ $permissions->firstItem() + $key }}</th>
                                         <td>{{ $permission->name }}</td>
                                         <td>{{ $permission->route }}</td>
                                         <td>
@@ -61,6 +61,7 @@
                     </div>
                 </div>
             </div>
+        {{ $permissions->links() }}
             <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
