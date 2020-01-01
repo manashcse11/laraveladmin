@@ -26,3 +26,6 @@ Route::get('role/{role}/delete', 'RoleController@delete')->name('role.delete')->
 
 Route::resource('permission', 'PermissionController')->middleware('auth');
 Route::get('permission/{permission}/delete', 'PermissionController@delete')->name('permission.delete')->middleware('auth'); // Manually delete using GET method
+
+Route::resource('category', 'CategoryController')->middleware('auth');
+Route::get('category/{category}/delete', 'CategoryController@delete')->name('category.delete')->middleware('auth'); // Manually delete using GET method

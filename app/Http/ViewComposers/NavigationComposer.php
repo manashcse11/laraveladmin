@@ -18,11 +18,15 @@ class NavigationComposer
             )
           , array('name' => 'Roles', 'route' => 'role.index', 'icon' => 'fas fa-user-tag', 'sub_menu' => array(
                 array('name' => 'List', 'route' => 'role.index')
-            , array('name' => 'Add', 'route' => 'role.create'))
+                , array('name' => 'Add', 'route' => 'role.create'))
             )
           , array('name' => 'Permissions', 'route' => 'permission.index', 'icon' => 'fas fa-user-lock', 'sub_menu' => array(
                 array('name' => 'List', 'route' => 'permission.index')
-            , array('name' => 'Add', 'route' => 'permission.create'))
+                , array('name' => 'Add', 'route' => 'permission.create'))
+            )
+            , array('name' => 'Categories', 'route' => 'category.index', 'icon' => 'fas fa-tag', 'sub_menu' => array(
+                array('name' => 'List', 'route' => 'category.index')
+                , array('name' => 'Add', 'route' => 'category.create'))
             )
         );
     }
