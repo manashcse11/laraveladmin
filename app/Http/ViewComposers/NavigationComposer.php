@@ -14,7 +14,7 @@ class NavigationComposer
         return array(
             array('name' => 'Users', 'route' => 'user.index', 'icon' => 'fas fa-user', 'sub_menu' => array(
                 array('name' => 'List', 'route' => 'user.index')
-              , array('name' => 'User', 'route' => 'user.create'))
+              , array('name' => 'Add', 'route' => 'user.create'))
             )
           , array('name' => 'Roles', 'route' => 'role.index', 'icon' => 'fas fa-user-tag', 'sub_menu' => array(
                 array('name' => 'List', 'route' => 'role.index')
